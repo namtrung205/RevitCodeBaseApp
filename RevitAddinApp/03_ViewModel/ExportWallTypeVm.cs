@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel ;
 using System.Windows.Controls ;
 using System.Windows.Input ;
+using Autodesk.Revit.UI ;
 using RevitAddinApp._01_Model ;
 using RevitAddinApp._01_Model.Enums ;
 using RevitAddinApp._02_Views ;
@@ -29,13 +30,15 @@ public class ExportWallTypeVm : ViewModelBase
 
   private TypeConstruction _typeConstruction = TypeConstruction.TemporaryConstruction ;
 
-  public ExportWallTypeVm()
+  private ExternalCommandData _externalCommandData ;
+  
+  public ExportWallTypeVm(ExternalCommandData externalCommandData)
   {
+    this._externalCommandData = externalCommandData ;
     IsAllItemChecked = true ;
     ListExportVolumeToExcelInfos = new ObservableCollection<ExportWallToExcelInfo>() ;
-    SelectSectionViewCommand = new RelayCommand<object>( _ => true, SelectSectionViewInvoke ) ;
+    SelectSectionViewCommand = new RelayCommand<object>( _ => true, SelectWallInvoke ) ;
     ApplyCommand = new RelayCommand<object>( _ => true, ApplyInvoke ) ;
-
 
     OnItemCheckedChangeCommand = new RelayCommand<object>( _ => true, _ =>
     {
@@ -134,12 +137,13 @@ public class ExportWallTypeVm : ViewModelBase
   public ICommand SelectSectionViewCommand { get ; set ; }
   public ICommand ApplyCommand { get ; set ; }
 
-
   public ICommand OnItemCheckedChangeCommand { get ; set ; }
 
-
-  private void SelectSectionViewInvoke( object obj )
+  private void SelectWallInvoke( object obj )
   {
+    UIDocument uiDoc = _externalCommandData.Application.ActiveUIDocument;
+    HelperRevit.UtSelection.SelectObjectByTypes( uiDoc ) ;
+
     // if ( UiExportWallType == null ) return ;
     // UiExportWallType.Hide() ;
     // // var listSectionView = UtSectionView.FilterCrossSectionViews( ConstantMessages.PromptSelectSectionView ) ;

@@ -1,14 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <UseWPF>true</UseWPF>
         <LangVersion>latest</LangVersion>
         <PlatformTarget>x64</PlatformTarget>
         <ImplicitUsings>true</ImplicitUsings>
-        <PublishAddinFiles>true</PublishAddinFiles>
         <Configurations>Debug R20;Debug R21;Debug R22;Debug R23;Debug R24;Debug R25</Configurations>
         <Configurations>$(Configurations);Release R20;Release R21;Release R22;Release R23;Release R24;Release R25</Configurations>
-        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <PropertyGroup Condition="$(Configuration.Contains('R20'))">
@@ -36,36 +33,12 @@
         <TargetFramework>net8.0-windows</TargetFramework>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <StartAction>Program</StartAction>
-        <StartProgram>C:\Program Files\Autodesk\Revit $(RevitVersion)\Revit.exe</StartProgram>
-        <StartArguments>/language ENG</StartArguments>
-    </PropertyGroup>
-
     <ItemGroup>
         <PackageReference Include="Nice3point.Revit.Build.Tasks" Version="2.*"/>
         <PackageReference Include="Nice3point.Revit.Toolkit" Version="$(RevitVersion).*"/>
         <PackageReference Include="Nice3point.Revit.Extensions" Version="$(RevitVersion).*"/>
         <PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*"/>
         <PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <Resource Include="Resources\Icons\RibbonIcon16.png"/>
-        <Resource Include="Resources\Icons\RibbonIcon32.png"/>
-        <None Remove="Resources\Icons\LayoutIcon32.png" />
-        <Resource Include="Resources\Icons\LayoutIcon32.png" />
-        <None Remove="Resources\Icons\LayoutIcon16.png" />
-        <Resource Include="Resources\Icons\LayoutIcon16.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\HelperRevit\HelperRevit.csproj" />
-      <ProjectReference Include="..\Helpers\Helpers.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="02_Views\Event\" />
     </ItemGroup>
 
 </Project>

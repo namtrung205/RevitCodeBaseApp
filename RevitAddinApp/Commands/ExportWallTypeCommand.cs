@@ -15,7 +15,8 @@ namespace RevitAddinApp.Commands
     public override void Execute()
     {
       Helpers.Utils.LoggerCit.Instance.LogInformation( "Execute StartupCommand" ) ;
-      ExportWallTypeVm exportWallTypeVm = new ExportWallTypeVm() ;
+      
+      ExportWallTypeVm exportWallTypeVm = new ExportWallTypeVm(ExternalCommandData) ;
       UiExportWallType ui = new UiExportWallType(exportWallTypeVm) ;
       ui.Show( UiApplication.MainWindowHandle ) ;
     }
