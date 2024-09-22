@@ -1,0 +1,31 @@
+<Window x:Class="RevitAddinApp._02_Views.Progressbar.UiProgressbar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize"
+        WindowStyle="None"
+        Topmost="True"
+        Background="#f0f0f0"
+        Height="80" Width="330">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top" Background="#f3f3f3" Name="CustomWindow">
+            <DockPanel DockPanel.Dock="Left">
+                <Image Name="IconImage" Margin="8 0 0 0" Width="16" Height="16" />
+                <TextBlock Foreground="#7c7979" Padding="0 7 0 0" VerticalAlignment="Center" Name="TextTitleWindow" Margin="4 0 10 0" TextAlignment="Left" Height="30" />
+            </DockPanel>
+        </DockPanel>
+
+        <StackPanel VerticalAlignment="Center">
+            <Grid>
+                <ProgressBar Name="ProgressBar" Margin="5 0 5 0" Height="20" />
+                <TextBlock Grid.ColumnSpan="2"
+                           Name="TextProgress"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+
+    </DockPanel>
+</Window>

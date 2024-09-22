@@ -1,0 +1,116 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Import Project="$(SolutionDir)env.prop" />
+    <PropertyGroup>
+        <Configurations>Debug R20;Debug R21;Debug R22;Debug R23;Debug R24;Debug R25</Configurations>
+        <Configurations>$(Configurations);Release R20;Release R21;Release R22;Release R23;Release R24;Release R25</Configurations>
+        <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+        <LangVersion>default</LangVersion>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <Platforms>x64</Platforms>
+        <Authors>TTD Inc.</Authors>
+        <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+        <EnableDefaultPageItems>false</EnableDefaultPageItems>
+        <UseWPF>true</UseWPF>
+        <RunPostBuildEvent>Always</RunPostBuildEvent>
+        <TargetFramework>net48</TargetFramework>
+        <RootNamespace>Helpers</RootNamespace>
+    </PropertyGroup>
+    
+
+    <PropertyGroup Condition=" '$(ConfigMode)' == 'Debug' ">
+        <DebugType>pdbonly</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(ConfigMode)' == 'Debug' ">
+        <DefineConstants>$(DefineConstants);DEBUG_PANEL</DefineConstants>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(ConfigMode)' == 'Release' ">
+        <DebugType>pdbonly</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="System" />
+        <Reference Include="System.Activities" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.DirectoryServices" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.Windows" />
+        <Reference Include="System.Windows.Forms" />
+        <Reference Include="System.Windows.Presentation" />
+        <Reference Include="System.Xaml" />
+        <Reference Include="System.Xml.Linq" />
+        <Reference Include="System.Data.DataSetExtensions" />
+        <Reference Include="Microsoft.CSharp" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Net.Http" />
+        <Reference Include="System.Xml" />
+        <Reference Include="UIAutomationProvider" />
+        <Reference Include="WindowsBase" />
+        <Reference Include="WindowsFormsIntegration" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Csv" Version="2.0.93" />
+        <PackageReference Include="ExcelDataReader" Version="3.7.0-develop00385" />
+        <PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0-develop00385" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.122" />
+        <PackageReference Include="Serilog" Version="4.0.2-dev-02226" />
+        <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+        <PackageReference Include="System.Text.Encoding.CodePages" Version="9.0.0-preview.3.24172.9" />
+        <PackageReference Include="WindowsAPICodePack-Shell" Version="1.1.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Include="Utils\ConstantsPathFolder.cs" />
+        <Compile Include="Utils\LowLevelKeyboardListener.cs" />
+        <Compile Include="Utils\RelayCommand.cs" />
+        <Compile Include="Utils\Ut_Attribute.cs" />
+        <Compile Include="Utils\Ut_AutoName.cs" />
+        <Compile Include="Utils\Ut_Csv.cs" />
+        <Compile Include="Utils\Ut_DialogUtils.cs" />
+        <Compile Include="Utils\Ut_Enum.cs" />
+        <Compile Include="Utils\Ut_File.cs" />
+        <Compile Include="Utils\Ut_Folder.cs" />
+        <Compile Include="Utils\Ut_Fraction.cs" />
+        <Compile Include="Utils\Ut_GetFileResource.cs" />
+        <Compile Include="Utils\Ut_Io.cs" />
+        <Compile Include="Utils\Ut_Json.cs" />
+        <Compile Include="Utils\LoggerCit.cs" />
+        <Compile Include="Utils\Ut_Message.cs" />
+        <Compile Include="Utils\Ut_MessageCad.cs" />
+        <Compile Include="Utils\Ut_NumberExtent.cs" />
+        <Compile Include="Utils\Ut_OpenPdf.cs" />
+        <Compile Include="Utils\Ut_Processes.cs" />
+        <Compile Include="Utils\Ut_Properties.cs" />
+        <Compile Include="Utils\Ut_StringExtent.cs" />
+        <Compile Include="Utils\Ut_Window.cs" />
+        <Compile Include="Utils\ViewModelBase.cs" />
+        <Compile Include="Utils_Wpf\Behavior\BaseBehavior.cs" />
+        <Compile Include="Utils_Wpf\Behavior\BaseControlBehavior.cs" />
+        <Compile Include="Utils_Wpf\DataGridUtils.cs" />
+        <Compile Include="Utils_Wpf\FindVisualUtils.cs" />
+        <Compile Include="Utils_Wpf\InputBehaviorComboboxEdit.cs" />
+        <Compile Include="Utils_Wpf\InputBehaviourTextBox.cs" />
+        <Compile Include="Utils_Wpf\InputTextBehavior.cs" />
+        <Compile Include="Utils_Wpf\LongPathConverter.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Utils_Wpf\ResourceDictionary.xaml" />
+        <Page Include="Utils_Wpf\ResourceDictionary.xaml" />
+        <None Remove="Utils_Wpf\ResourceDictionaryCustom.xaml" />
+        <Page Include="Utils_Wpf\ResourceDictionaryCustom.xaml" />
+        <None Remove="Utils\System.ExceptionCit.cs~" />
+    </ItemGroup>
+
+</Project>
