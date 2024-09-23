@@ -24,12 +24,12 @@ sealed partial class Build
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
         Version = newVersion ;
-        CommitChanges( newVersion ) ;
 
         Nuke.Common.Logger.Warn($"{Version}");
 
-
         ValidateRelease() ;
+        CommitChanges( newVersion ) ;
+        
 
         var artifacts = Directory.GetFiles( ArtifactsDirectory, "*" ) ;
         var changelog = CreateGithubChangelog() ;
