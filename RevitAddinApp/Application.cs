@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations ;
+﻿using System.Reflection ;
+using Helpers.Utils ;
 using Nice3point.Revit.Toolkit.External ;
 using RevitAddinApp.Commands ;
 
@@ -13,6 +14,9 @@ namespace RevitAddinApp
   {
     public override void OnStartup()
     {
+      var logFolder = Assembly.GetExecutingAssembly().GetName().Name ;
+      if ( logFolder != null ) LoggerCit.LogFolder = logFolder ;
+
       CreateRibbon() ;
     }
 

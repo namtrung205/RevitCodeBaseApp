@@ -11,10 +11,12 @@ public sealed class LoggerCit
 
   private readonly ILogger _serilog ;
 
+  public static string LogFolder { get ; set ; } = "" ;
+
   // Private constructor to prevent external instantiation
   private LoggerCit()
   {
-    var logPath = Path.Combine( Path.GetTempPath(), "logs", "log-.txt" ) ;
+    var logPath = Path.Combine( Path.GetTempPath(), "logs" , LogFolder, "log-.txt" ) ;
     _serilog = new LoggerConfiguration()
       .MinimumLevel.Debug()
       .WriteTo.File(
@@ -47,7 +49,7 @@ public sealed class LoggerCit
 #endif
   }
 
-  public void LogError( System.Exception? ex = null,
+  public void LogError( Exception? ex = null,
     [CallerMemberName] string memberName = "",
     string message = "")
   {
