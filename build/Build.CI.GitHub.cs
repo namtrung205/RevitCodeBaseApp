@@ -24,7 +24,7 @@ sealed partial class Build
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
         Version = newVersion ;
-
+        CommitChanges( newVersion ) ;
 
         Nuke.Common.Logger.Warn($"{Version}");
 
@@ -40,7 +40,7 @@ sealed partial class Build
         var release = await GitHubTasks.GitHubClient.Repository.Release.Create( gitHubOwner, gitHubName, newRelease ) ;
         await UploadArtifactsAsync( release, artifacts ) ;
         
-        CommitChanges( Version ) ;
+
         
       } ) ;
 
