@@ -46,16 +46,23 @@ sealed partial class Build
     var minor = int.Parse( parts[ 1 ] ) ;
     var patch = int.Parse( parts[ 2 ] ) ;
 
+    
+    
     // Check branch name and increment version
     var branchName = Environment.GetEnvironmentVariable( "GITHUB_REF_NAME" ) ;
-    if ( branchName != null && branchName.StartsWith( "feature/" ) ) {
+    Log.Information($"branchName {branchName}" );
+    
+    if ( branchName != null && branchName.Contains( "feature/" ) ) {
       major++ ;
       minor = 0 ;
       patch = 0 ;
     }
-    else if ( branchName != null && branchName.StartsWith( "bugfix/" ) ) {
+    else if ( branchName != null && branchName.Contains( "bugfix/" ) ) {
       minor++ ;
       patch = 0 ;
+    }
+    else {
+      patch++ ;
     }
 
     return $"{major}.{minor}.{patch}" ;
