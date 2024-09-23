@@ -46,18 +46,7 @@ sealed partial class Build
 
         
       } ) ;
-
-  void CommitChanges(string versionFilePath, string newVersion )
-  {
-    GitTasks.Git("config user.email 'action@github.com'");
-    GitTasks.Git("config user.name 'GitHub Action'");
-
-    GitTasks.Git($"add {versionFilePath}");
-    GitTasks.Git($"commit -m 'Bump version to {newVersion}'");
-
-    // Push changes to main branch
-    GitTasks.Git("push origin main");
-  }
+  
   
   
   string IncrementVersion( string version )
