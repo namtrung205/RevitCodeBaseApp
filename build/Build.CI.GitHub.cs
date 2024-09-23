@@ -20,7 +20,13 @@ sealed partial class Build
 
             var gitHubName = GitRepository.GetGitHubName();
             var gitHubOwner = GitRepository.GetGitHubOwner();
-
+            
+            var versionFilePath = Path.Combine(Directory.GetCurrentDirectory(), "version.txt");
+            var version = File.ReadAllText(versionFilePath).Trim();
+            var newVersion = IncrementVersion(version);
+            File.WriteAllText(versionFilePath, newVersion);
+            Version = version ;
+            
             ValidateRelease();
 
             var artifacts = Directory.GetFiles(ArtifactsDirectory, "*");
@@ -38,6 +44,32 @@ sealed partial class Build
             await UploadArtifactsAsync(release, artifacts);
         });
 
+    string IncrementVersion(string version)
+    {
+        var parts = version.Split('.');
+        var major = int.Parse(parts[0]);
+        var minor = int.Parse(parts[1]);
+        var patch = int.Parse(parts[2]);
+
+        // Check branch name and increment version
+        var branchName = Environment.GetEnvironmentVariable("GITHUB_REF_NAME");
+        if (branchName != null && branchName.StartsWith("feature/"))
+        {
+            major++;
+            minor = 0;
+            patch = 0;
+        }
+        else if (branchName != null && branchName.StartsWith("bugfix/"))
+        {
+            minor++;
+            patch = 0;
+        }
+
+        return $"{major}.{minor}.{patch}";
+    }
+
+    
+    
     void ValidateRelease()
     {
         var tags = GitTasks.Git("describe --tags --abbrev=0 --always", logInvocation: false, logOutput: false);
