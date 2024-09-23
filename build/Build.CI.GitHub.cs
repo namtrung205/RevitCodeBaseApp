@@ -24,6 +24,8 @@ sealed partial class Build
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
         Version = newVersion ;
+
+
         Nuke.Common.Logger.Warn($"{Version}");
 
 
@@ -37,8 +39,24 @@ sealed partial class Build
 
         var release = await GitHubTasks.GitHubClient.Repository.Release.Create( gitHubOwner, gitHubName, newRelease ) ;
         await UploadArtifactsAsync( release, artifacts ) ;
+        
+        CommitChanges( Version ) ;
+        
       } ) ;
 
+  void CommitChanges(string newVersion)
+  {
+    GitTasks.Git("config user.email 'action@github.com'");
+    GitTasks.Git("config user.name 'GitHub Action'");
+
+    GitTasks.Git($"add version.txt");
+    GitTasks.Git($"commit -m 'Bump version to {newVersion}'");
+
+    // Push changes to main branch
+    GitTasks.Git("push origin main");
+  }
+  
+  
   string IncrementVersion( string version )
   {
     var parts = version.Split( '.' ) ;
