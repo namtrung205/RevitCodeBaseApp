@@ -3,7 +3,6 @@ using Nuke.Common.Git ;
 using Nuke.Common.Tools.Git ;
 using Nuke.Common.Tools.GitHub ;
 using Octokit ;
-
 sealed partial class Build
 {
   Target PublishGitHub =>
@@ -25,6 +24,7 @@ sealed partial class Build
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
         Version = newVersion ;
+        Nuke.Common.Logger.Warn($"{Version}");
 
 
         ValidateRelease() ;
