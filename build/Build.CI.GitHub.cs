@@ -49,7 +49,7 @@ sealed partial class Build
     GitTasks.Git("config user.email 'action@github.com'");
     GitTasks.Git("config user.name 'GitHub Action'");
 
-    GitTasks.Git($"add version.txt");
+    GitTasks.Git($"add .");
     GitTasks.Git($"commit -m 'Bump version to {newVersion}'");
 
     // Push changes to main branch
