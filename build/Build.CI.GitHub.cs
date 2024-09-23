@@ -24,7 +24,7 @@ sealed partial class Build
         var version = File.ReadAllText( versionFilePath ).Trim() ;
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
-        Version = version ;
+        Version = newVersion ;
 
 
         ValidateRelease() ;
