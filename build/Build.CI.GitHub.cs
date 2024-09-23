@@ -23,9 +23,12 @@ sealed partial class Build
         var version = File.ReadAllText( versionFilePath ).Trim() ;
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
-        Version = newVersion ;
 
-        Nuke.Common.Logger.Warn($"{Version}");
+        Version = newVersion ;
+        
+        Logger.Warn($"{Version}");
+        Logger.Warn($" File Path: {versionFilePath}");
+
 
         ValidateRelease() ;
         CommitChanges( newVersion ) ;
