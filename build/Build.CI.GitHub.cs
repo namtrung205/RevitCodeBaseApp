@@ -31,7 +31,7 @@ sealed partial class Build
 
 
         ValidateRelease() ;
-        CommitChanges( versionFilePath, newVersion ) ;
+        //CommitChanges( versionFilePath, newVersion ) ;
         
 
         var artifacts = Directory.GetFiles( ArtifactsDirectory, "*" ) ;
