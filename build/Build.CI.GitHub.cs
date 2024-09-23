@@ -49,8 +49,10 @@ sealed partial class Build
     
     
     // Check branch name and increment version
-    var branchName = Environment.GetEnvironmentVariable( "GITHUB_REF_NAME" ) ;
+    var branchName = Environment.GetEnvironmentVariable( "GITHUB_REF" ) ;
+    var branchNameGithubHeadRef = Environment.GetEnvironmentVariable("GITHUB_HEAD_REF");
     Log.Information($"branchName {branchName}" );
+    Log.Information($"branchName_GITHUB_HEAD_REF {branchNameGithubHeadRef}" );
     
     if ( branchName != null && branchName.Contains( "feature/" ) ) {
       major++ ;
