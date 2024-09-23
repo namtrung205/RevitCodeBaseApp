@@ -20,13 +20,16 @@ sealed partial class Build
 
             var gitHubName = GitRepository.GetGitHubName();
             var gitHubOwner = GitRepository.GetGitHubOwner();
-            
-            var versionFilePath = Path.Combine(Directory.GetCurrentDirectory(), "version.txt");
-            var version = File.ReadAllText(versionFilePath).Trim();
-            var newVersion = IncrementVersion(version);
-            File.WriteAllText(versionFilePath, newVersion);
-            Version = version ;
-            
+
+            var fullName = Directory.GetParent(Directory.GetCurrentDirectory())?.FullName ;
+            if ( fullName != null ) {
+                var versionFilePath = Path.Combine(fullName, "version.txt");
+                var version = File.ReadAllText(versionFilePath).Trim();
+                var newVersion = IncrementVersion(version);
+                File.WriteAllText(versionFilePath, newVersion);
+                Version = version ;
+            }
+
             ValidateRelease();
 
             var artifacts = Directory.GetFiles(ArtifactsDirectory, "*");
