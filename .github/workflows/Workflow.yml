@@ -25,7 +25,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
         run: |
-          echo "Bump version" > version.txt
           git add version.txt
           git commit -m 'Bump version'
           git push

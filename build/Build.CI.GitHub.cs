@@ -13,6 +13,7 @@ sealed partial class Build
       .OnlyWhenStatic( () => IsServerBuild && GitRepository.IsOnMainOrMasterBranch() )
       .Executes( async () =>
       {
+        Logger.Warn($"Begin PublishGitHub");
         GitHubTasks.GitHubClient = new GitHubClient( new ProductHeaderValue( Solution.Name ) ) { Credentials = new Credentials( GitHubToken ) } ;
 
         var gitHubName = GitRepository.GetGitHubName() ;
