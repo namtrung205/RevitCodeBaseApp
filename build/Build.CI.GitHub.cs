@@ -30,9 +30,11 @@ sealed partial class Build
         Logger.Warn($" File Path: {versionFilePath}");
 
 
+
+        
         ValidateRelease() ;
         //CommitChanges( versionFilePath, newVersion ) ;
-        
+        Log.Information($"End  ValidateRelease" );
 
         var artifacts = Directory.GetFiles( ArtifactsDirectory, "*" ) ;
         var changelog = CreateGithubChangelog() ;
