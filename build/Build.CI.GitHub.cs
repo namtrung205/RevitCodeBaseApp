@@ -42,9 +42,6 @@ sealed partial class Build
 
         var release = await GitHubTasks.GitHubClient.Repository.Release.Create( gitHubOwner, gitHubName, newRelease ) ;
         await UploadArtifactsAsync( release, artifacts ) ;
-        
-
-        
       } ) ;
   
   
