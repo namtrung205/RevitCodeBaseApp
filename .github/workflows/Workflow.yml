@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Run Nuke build
-        run: ./.nuke/build.cmd Compile PublishGitHub --GitHubToken ${{ secrets.MY_PERSONAL_TOKEN }}
+        run: ./.nuke/build.cmd Compile AutoVersion --GitHubToken ${{ secrets.MY_PERSONAL_TOKEN }}
 
       - name: Set up Git
         run: |
@@ -28,4 +28,7 @@ jobs:
           git add version.txt
           git commit -m "Bump version"
           git push
+
+      - name: Run Nuke build
+        run: ./.nuke/build.cmd Compile PublishGitHub --GitHubToken ${{ secrets.MY_PERSONAL_TOKEN }}
 

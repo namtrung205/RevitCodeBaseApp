@@ -1,6 +1,6 @@
 [Setup]
                     AppName=RevitAddinApp.TTD
-                    AppVersion=1.0.0
+                    AppVersion=7.0.0
                     DefaultDirName="C:\ProgramData\Autodesk\ApplicationPlugins\RevitAddinApp.bundle"
                     DefaultGroupName=RevitAddinApp
                     OutputDir= "C:\Users\C.DES.011\Desktop\Private\Dev\Code Base TTD\RevitCodeBaseApp\output"

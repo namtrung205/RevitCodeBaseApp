@@ -8,6 +8,9 @@ sealed partial class Build
         .DependsOn(Clean)
         .Executes(() =>
         {
+            var versionFilePath = Path.Combine( Directory.GetCurrentDirectory(), "version.txt" ) ;
+            Version = File.ReadAllText( versionFilePath ).Trim() ;
+            
             foreach (var configuration in GlobBuildConfigurations())
                 DotNetBuild(settings => settings
                     .SetConfiguration(configuration)

@@ -10,6 +10,9 @@ sealed partial class Build
         {
             foreach (var project in Bundles)
             {
+                var versionFilePath = Path.Combine( Directory.GetCurrentDirectory(), "version.txt" ) ;
+                Version = File.ReadAllText( versionFilePath ).Trim() ;
+                
                 Log.Information("Project: {Name}", project.Name);
 
                 var directories = Directory.GetDirectories(project.Directory, "* Release *", SearchOption.AllDirectories);
