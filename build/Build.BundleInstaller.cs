@@ -1,13 +1,9 @@
-using Autodesk.PackageBuilder;
-using System.Xml.Linq;
 using Nuke.Common.Git;
-using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling ;
-using Nuke.Common.Utilities;
 
 sealed partial class Build
 {
-    Target CreateBundleInstaller => _ => _
+    Target CreateBundleInstaller => d => d
         .DependsOn(Compile)
         .OnlyWhenStatic(() => IsLocalBuild || GitRepository.IsOnMainOrMasterBranch())
         .Executes(() =>
