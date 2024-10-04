@@ -25,5 +25,38 @@ sealed partial class Build
         var newVersion = IncrementVersion( version ) ;
         File.WriteAllText( versionFilePath, newVersion ) ;
       } ) ;
-  
+    
+  string IncrementVersion( string version )
+  {
+    var parts = version.Split( '.' ) ;
+    var major = int.Parse( parts[ 0 ] ) ;
+    var minor = int.Parse( parts[ 1 ] ) ;
+    var patch = int.Parse( parts[ 2 ] ) ;
+
+    
+    
+    // Check branch name and increment version
+    var branchName = Environment.GetEnvironmentVariable("GITHUB_HEAD_REF");
+    Log.Information($"branchName {branchName}" );
+    
+    if ( branchName != null && branchName.Contains( "release/" ) ) {
+      major++ ;
+      minor = 0 ;
+      patch = 0 ;
+    }
+    else if ( branchName != null && branchName.Contains( "feature/" ) ) {
+      minor++ ;
+      patch = 0 ;
+    }
+    else if ( branchName != null && branchName.Contains( "bugfix/" ) ) {
+      patch++ ;
+    }
+    else {
+      patch++ ;
+    }
+
+    return $"{major}.{minor}.{patch}" ;
+  }
+
+
 }
