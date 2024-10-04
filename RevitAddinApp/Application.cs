@@ -1,5 +1,7 @@
 ﻿using System.Reflection ;
 using Helpers.Utils ;
+using JetBrains.Annotations ;
+using Nice3point.Revit.Extensions ;
 using Nice3point.Revit.Toolkit.External ;
 using RevitAddinApp.Commands ;
 
@@ -27,7 +29,9 @@ namespace RevitAddinApp
     private void CreateRibbon()
     {
       var panel = Application.CreatePanel( "Commands", "RevitAddinApp" ) ;
-      panel.AddPushButton<ExportWallTypeCommand>( "Execute" ).SetImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ).SetLargeImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ) ;
+      panel.AddPushButton<ExportWallTypeCommand>( "Execute" ).
+        SetImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ).
+        SetLargeImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ) ;
     }
   }
 }

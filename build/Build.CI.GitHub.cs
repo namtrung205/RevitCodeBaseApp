@@ -7,7 +7,7 @@ sealed partial class Build
 {
   Target PublishGitHub =>
     _ => _
-      .DependsOn( CreateInstaller, CreateBundleInstaller )
+      .DependsOn(CreateBundleInstaller )
       .Requires( () => GitHubToken )
       .Requires( () => GitRepository )
       .OnlyWhenStatic( () => IsServerBuild && GitRepository.IsOnMainOrMasterBranch() )
@@ -21,17 +21,7 @@ sealed partial class Build
 
 
         var versionFilePath = Path.Combine( Directory.GetCurrentDirectory(), "version.txt" ) ;
-        var version = File.ReadAllText( versionFilePath ).Trim() ;
-        var newVersion = IncrementVersion( version ) ;
-        File.WriteAllText( versionFilePath, newVersion ) ;
-
-        Version = newVersion ;
-        
-        Logger.Warn($"{Version}");
-        Logger.Warn($" File Path: {versionFilePath}");
-
-
-
+        Version = File.ReadAllText( versionFilePath ).Trim() ;
         
         ValidateRelease() ;
         //CommitChanges( versionFilePath, newVersion ) ;

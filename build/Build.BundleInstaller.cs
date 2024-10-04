@@ -1,19 +1,18 @@
-using Autodesk.PackageBuilder;
-using System.Xml.Linq;
 using Nuke.Common.Git;
-using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling ;
-using Nuke.Common.Utilities;
 
 sealed partial class Build
 {
-    Target CreateBundleInstaller => _ => _
+    Target CreateBundleInstaller => d => d
         .DependsOn(Compile)
         .OnlyWhenStatic(() => IsLocalBuild || GitRepository.IsOnMainOrMasterBranch())
         .Executes(() =>
         {
             foreach (var project in Bundles)
             {
+                var versionFilePath = Path.Combine( Directory.GetCurrentDirectory(), "version.txt" ) ;
+                Version = File.ReadAllText( versionFilePath ).Trim() ;
+                
                 Log.Information("Project: {Name}", project.Name);
 
                 var directories = Directory.GetDirectories(project.Directory, "* Release *", SearchOption.AllDirectories);
