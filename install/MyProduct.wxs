@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="fecf3770-fe6b-4333-bc21-aee46e66c93c" Name="MyProduct" Language="1033" Codepage="Windows-1252" Version="1.0.0.0" UpgradeCode="fecf3770-fe6b-4333-bc21-aee45e66c93b" Manufacturer="C.DES.011">
+    <Package InstallerVersion="200" Compressed="yes" SummaryCodepage="Windows-1252" Languages="1033" />
+    <Media Id="1" Cabinet="MyProduct.cab" EmbedCab="yes" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder" Name="ProgramFilesFolder">
+        <Directory Id="My20Company" Name="My Company">
+          <Directory Id="INSTALLDIR" Name="My Product">
+
+            <Component Id="Component.bundle.zip_3618861347" Guid="fecf3770-fe6b-4333-bc21-aee401bb90e3">
+              <File Id="bundle.zip_3618861347" Source="..\output\OutBundle\bundle.zip" />
+            </Component>
+
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <UI />
+
+    <CustomAction Id="MyAction" BinaryKey="MyAction_File" DllEntry="MyAction" Return="check" Execute="immediate" />
+
+    <Binary Id="MyAction_File" SourceFile="%this%.CA.dll" />
+
+    <UIRef Id="WixUI_Minimal" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+
+    <Feature Id="Complete" Title="Complete" Absent="allow" Level="1">
+      <ComponentRef Id="Component.bundle.zip_3618861347" />
+    </Feature>
+
+    <InstallExecuteSequence>
+      <Custom Action="MyAction" After="InstallFiles"> (NOT Installed) </Custom>
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>
+
