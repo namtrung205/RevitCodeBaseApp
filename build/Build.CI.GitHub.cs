@@ -7,7 +7,7 @@ sealed partial class Build
 {
   Target PublishGitHub =>
     _ => _
-      .DependsOn( CreateInstaller, CreateBundle )
+      .DependsOn( CreateInstaller, CreateBundleInstaller )
       .Requires( () => GitHubToken )
       .Requires( () => GitRepository )
       .OnlyWhenStatic( () => IsServerBuild && GitRepository.IsOnMainOrMasterBranch() )

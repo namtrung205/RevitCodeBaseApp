@@ -5,6 +5,7 @@ sealed partial class Build : NukeBuild
 {
     string[] Configurations;
     Project[] Bundles;
+    Project[] BundlesInstaller;
     Dictionary<Project, Project> InstallersMap;
 
     [Secret] [Parameter] string GitHubToken;

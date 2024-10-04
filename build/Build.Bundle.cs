@@ -3,6 +3,7 @@ using System.Xml.Linq;
 using Nuke.Common.Git;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Utilities;
+using Nuke.Common.Utilities.Collections ;
 
 sealed partial class Build
 {
@@ -81,13 +82,19 @@ sealed partial class Build
         return configElement.Value;
     }
 
-    static void CompressFolder(AbsolutePath bundleRoot)
+    static AbsolutePath CompressFolder(AbsolutePath bundleRoot)
     {
-        var bundleName = bundleRoot.WithExtension(".zip");
-        bundleRoot.CompressTo(bundleName);
-        bundleRoot.DeleteDirectory();
+        if ( bundleRoot.Parent != null ) {
+            var outBundleName = AbsolutePath.Create(Path.Combine( bundleRoot.Parent, "OutBundle/bundle" )) ;
+            var bundleName = outBundleName.WithExtension(".zip");
+            // var bundleName = Path.Combine(bundleRoot, "BundleFile",".zip");
+            bundleRoot.CompressTo(bundleName);
+            bundleRoot.DeleteDirectory();
 
-        Log.Information("Compressing into a Zip: {Name}", bundleName);
+            Log.Information("Compressing into a Zip: {Name}", bundleName);
+            return outBundleName.Parent ;
+        }
+        return bundleRoot ;
     }
 
     static void CopyAssemblies(string sourcePath, string targetPath)

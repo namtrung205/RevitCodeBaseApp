@@ -13,4 +13,8 @@
         <PackageReference Include="WixSharp.wix.bin" Version="3.*"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="System.Windows.Forms" />
+    </ItemGroup>
+
 </Project>
