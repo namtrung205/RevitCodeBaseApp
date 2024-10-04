@@ -30,8 +30,8 @@ namespace RevitAddinApp
     {
       var panel = Application.CreatePanel( "Commands", "RevitAddinApp" ) ;
       panel.AddPushButton<ExportWallTypeCommand>( "Execute" ).
-        SetImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ).
-        SetLargeImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ) ;
+              SetImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ).
+              SetLargeImage( "/RevitAddinApp;component/Resources/Icons/RibbonIcon16.png" ) ;
     }
   }
 }
